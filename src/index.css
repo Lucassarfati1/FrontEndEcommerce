@@ -1,68 +1,204 @@
-@import "bootstrap-icons/font/bootstrap-icons.css";
-
-/* Reseteo global */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+html,body {
+  margin:0;
+  padding:0;
 }
-
 :root {
+  margin: 0;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(156, 53, 53, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ 
 }
 
-html, body {
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
+ /* min-width: 320px;
+  min-height: 100vh;*/
   background-color: #F5EFFF;
-  overflow-x: hidden;
+  position: relative; /* Esto asegura que los elementos dentro de body tengan un orden de apilamiento adecuado */
+  /*z-index: 0; /* Neutralizamos cualquier otro z-index */
+ 
 }
 
+/* Contenedor principal */
 .container {
+ 
   display: flex;
   flex-direction: column;
   width: 100%;
+ 
+  
   align-items: center;
+  position: relative; /* Necesario para superponer elementos sobre la imagen */
+}
+/* Contenedor de la imagen */
+.portada {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 48px + 250px); /* Asegura que la imagen ocupe el 100% del espacio disponible después del nav */
+  margin-top: 0px; /* El nav tiene 48px de altura, por lo que la imagen comienza justo después */
+  overflow: hidden; /* Para asegurarnos de que no se desborde la imagen */
+  z-index: 0;
 }
 
+/* Imagen de fondo */
+.portada img {
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Hace que la imagen cubra toda el área sin deformarse */
+  z-index: -1; /* Esto asegura que la imagen quede detrás del contenido */
+  opacity: 1;
+}
+
+/* Sección de promoción */
+.promo {
+  display: flex;
+  width: 100%;
+  height: 22px;
+  background-color: white;
+  /*background-color: rgba(239, 239, 253, 0.8); /* Fondo con algo de transparencia */
+  /*padding: 4px 16px;*/
+  text-align: center;
+  align-items: center;
+  
+  justify-content: center;
+  font-size: 16px;
+  color: #333;
+  position: relative; /* El promo debe estar sobre la imagen pero no con absolute */
+  z-index: 1; /* Asegura que la promo esté sobre la imagen */
+}
+
+
+/* Estilo del nav */
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #A294F9;
+  /*background-color: rgba(162, 148, 249, 0.8); /* Fondo con algo de transparencia */
+  background-color: #2E5077;
+  
   width: 100%;
   max-width: 1250px;
   height: 48px;
   padding: 0 16px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  position: relative; /* Superpone el nav sobre la imagen */
+  top: 0;
+  z-index: 1; /* Asegura que el nav esté sobre la imagen */
 }
 
-.nav-logo a {
+/* Logo */
+.nav-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+}
+
+.logo-image {
+  width: 110px;
+  height: auto;
+  object-fit: contain;
+  background: transparent;
+}
+
+/* Secciones del menú */
+.sections {
+  position: relative; /* Necesitamos esto para posicionar el submenú */
+  flex-grow: 2; /* Ocupará más espacio para centrar las opciones */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Lista de secciones */
+.list {
+  display: flex; /* Alinea los elementos en una fila */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 16px; /* Espaciado entre los elementos de la lista */
+}
+
+.option {
+  position: relative; /* Necesario para posicionar el submenú debajo de cada opción */
+  font-size: 14px; /* Tamaño de letra más pequeño */
   color: white;
-  font-size: 24px;
   text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s;
 }
 
+.option:hover {
+  color: #d1d1d1; /* Color al pasar el mouse */
+}
+
+/* Ocultamos el submenú por defecto */
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%; /* Esto coloca el submenú directamente debajo de la opción */
+  left: 50%; /* Esto alinea el submenú al centro de la opción */
+  transform: translateX(-50%); /* Centra el submenú */
+  background-color: #4C6A85;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  width: 150px;
+  border-radius: 8px;
+}
+
+.option:hover .submenu {
+  display: block; /* Cuando pasas el cursor sobre la opción, mostramos el submenú */
+}
+
+.submenu li {
+  color: white;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.submenu li:hover {
+  background-color: #3F5A73; /* Color de fondo al pasar el cursor sobre las opciones del submenú */
+  color: white;
+}
+
+/* Íconos de navegación */
 .nav-icons {
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
   gap: 16px;
   list-style: none;
   margin: 0;
   padding: 0;
+  flex-shrink: 0; /* Previene que los íconos desaparezcan */
+  color: white;
 }
 
 .nav-icons li a {
@@ -70,74 +206,4 @@ html, body {
   font-size: 20px;
   text-decoration: none;
   transition: color 0.3s;
-}
-
-.nav-icons li a:hover {
-  color: #d1d1d1;
-}
-
-.promo {
-  width: 100%;
-  background-color: #EFEFFD;
-  padding: 4px 16px;
-  text-align: center;
-  font-size: 16px;
-  color: #333;
-  margin: 0;
-}
-
-h6 {
-  margin: 0;
-  line-height: 1.2;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-.nav-logo {
-  display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  height: 48px; /* Ajusta según el tamaño de tu barra de navegación */
-}
-
-.logo-image {
-  width: 110px;
-  height: 110px; /* Solo si necesitas un tamaño específico */
-  object-fit: contain;
-  background: transparent;
-}
-
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

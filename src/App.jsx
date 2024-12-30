@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Promo } from './Promo'
 import { Nav } from './Nav'
+import {Portada} from './Portada'
 
 function App() {
   
@@ -12,6 +13,7 @@ function App() {
   <div className="container">
     <Promo />
     <Nav />
+    <Portada />
   </div>
   )
   
