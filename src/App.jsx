@@ -5,6 +5,7 @@ import './App.css'
 import { Promo } from './Promo'
 import { Nav } from './Nav'
 import {Portada} from './Portada'
+import {CarruselDeOfertas} from './CarruselDeOfertas'
 
 function App() {
   
@@ -14,6 +15,7 @@ function App() {
     <Promo />
     <Nav />
     <Portada />
+    <CarruselDeOfertas />
   </div>
   )
   
