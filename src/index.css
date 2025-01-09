@@ -468,3 +468,19 @@ html, body {
   font-size: 14px;
   color: #bfbfbf;
 }
+
+.publ {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.Description {
+  background-color: white;
+  display: block;
+  width: 100%;
+}
+
+.Description h1{
+  color: #2E5077;
+}

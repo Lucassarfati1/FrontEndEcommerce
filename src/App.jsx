@@ -7,6 +7,8 @@ import { Nav } from './Nav'
 import {Portada} from './Portada'
 import {CarruselDeOfertas} from './CarruselDeOfertas'
 import {Footer} from './Footer'
+import {Publ} from './Publ'
+import { Description } from './Description'
 
 function App() {
   
@@ -16,6 +18,9 @@ function App() {
     <Promo />
     <Nav />
     <Portada />
+    <CarruselDeOfertas />
+    <Publ />
+    <Description />
     <CarruselDeOfertas />
     <Footer />
   </div>
