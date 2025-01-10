@@ -528,6 +528,10 @@ html, body {
   font-size: 1rem;
   color: #666;
 }
+
+.category-card-back{
+  color: #2E5077;
+}
 .tituloCategories {
   color: #2E5077;
 }
