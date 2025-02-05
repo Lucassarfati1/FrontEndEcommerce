@@ -10,15 +10,26 @@ import {Footer} from './Footer'
 import {Publ} from './Publ'
 import { Description } from './Description'
 import { Categories } from './Categories'
+import { Route,Routes } from 'react-router-dom'
+
+const Home = () => <h1>Home bro</h1>
+
+
+const Products = () => <h1>Productos bro</h1>
 
 function App() {
   
 
   return (
   <div className="container">
+    
     <Promo />
     <Nav />
     <Portada />
+    <Routes>
+    <Route path='/' element={<Home />} />
+    <Route path='/Products' element={<Products />} />
+    </Routes>
     <CarruselDeOfertas />
     <Publ />
     <Description />
