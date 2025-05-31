@@ -1,6 +1,21 @@
 html,body {
   margin:0;
   padding:0;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: grey;
+}
+/* Contenedor principal */
+.container {
+ 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+ 
+  
+  align-items: center;
+  position: relative; /* Necesario para superponer elementos sobre la imagen */
 }
 :root {
   margin: 0;
@@ -27,28 +42,9 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  padding: 0;
- /* min-width: 320px;
-  min-height: 100vh;*/
-  background-color: #F5EFFF;
-  position: relative; /* Esto asegura que los elementos dentro de body tengan un orden de apilamiento adecuado */
-  /*z-index: 0; /* Neutralizamos cualquier otro z-index */
- 
-}
 
-/* Contenedor principal */
-.container {
- 
-  display: flex;
-  flex-direction: column;
-  width: 100%;
- 
-  
-  align-items: center;
-  position: relative; /* Necesario para superponer elementos sobre la imagen */
-}
+
+
 /* Contenedor de la imagen */
 .portada {
   position: relative;
@@ -73,42 +69,41 @@ body {
 }
 
 /* Sección de promoción */
+/*/* ========== NAV PREMIUM CON BADGE DEL CARRITO ========== */
+
 /* Sección de promoción */
 .promo {
   display: flex;
   width: 100%;
-  height: 22px; /* Altura del promo */
+  height: 22px;
   background-color: white;
   text-align: center;
   align-items: center;
   justify-content: center;
   font-size: 16px;
   color: #333;
-  position: fixed; /* Fija el promo en la parte superior */
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000; /* Asegura que esté sobre otros elementos */
+  z-index: 1000;
 }
 
-/* Estilo del nav actualizado */
+/* Estilo del nav */
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2E5077;
+  background: linear-gradient(135deg, #2e5077 0%, #1e3a54 100%);
   width: 100%;
   height: 48px;
   padding: 0 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra solo en la parte inferior */
-  position: fixed; /* Fija el nav en la parte superior */
-  top: 22px; /* Posición debajo del promo */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 22px;
   left: 0;
-  z-index: 999; /* Asegura que esté sobre otros elementos pero debajo del promo */
-}
-
-/* Ajuste para el contenedor principal */
-.container {
-  margin-top: 70px; /* Altura total del promo (22px) + nav (48px) */
+  z-index: 999;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Logo */
@@ -117,6 +112,12 @@ body {
   justify-content: center;
   align-items: center;
   height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+  transform: scale(1.05);
 }
 
 .logo-image {
@@ -124,6 +125,7 @@ body {
   height: auto;
   object-fit: contain;
   background: transparent;
+  filter: brightness(1.1);
 }
 
 /* Secciones del menú */
@@ -140,87 +142,334 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 16px; /* Espaciado entre los elementos de la lista */
+  gap: 16px;
 }
 
+/* ========== MEJORAS PARA EL DROPDOWN ========== */
+
+/* Contenedor de cada opción del menú */
 .option {
+  position: relative;
   font-size: 14px;
   color: white;
   text-decoration: none;
   cursor: pointer;
-  transition: color 0.3s;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 .option:hover {
-  color: #d1d1d1; /* Color al pasar el mouse */
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Íconos de navegación */
+/* ========== SUBMENÚ MEJORADO ========== */
+
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.08);
+  list-style: none;
+  padding: 12px 0;
+  margin: 0;
+  width: 200px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: transparent;
+  }
+}
+
+.option:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  transition-delay: 0.1s;
+}
+
+.submenu:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.submenu li {
+  color: #1e293b;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  position: relative;
+}
+
+.submenu li:hover {
+  background: linear-gradient(135deg, #2e5077 0%, #4c6a85 100%);
+  color: #ffffff;
+  border-left-color: #ffffff;
+  padding-left: 24px;
+}
+
+.submenu li a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+/* ========== ÍCONOS DE NAVEGACIÓN PREMIUM ========== */
+
 .nav-icons {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   list-style: none;
   margin: 0;
   padding: 0;
-  padding-right: 24px; 
-  flex-shrink: 0; /* Previene que los íconos desaparezcan */
+  padding-right: 24px;
+  flex-shrink: 0;
   color: white;
+}
+
+.nav-icons li {
+  position: relative;
 }
 
 .nav-icons li a {
   color: white;
   font-size: 20px;
   text-decoration: none;
-  transition: color 0.3s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
+.nav-icons li a:hover {
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
 
-/* Ocultamos el submenú por defecto */
-.submenu {
-  display: none;
+/* ========== BADGE DEL CARRITO PREMIUM ========== */
+
+.cart-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-badge {
   position: absolute;
-  top: 100%; /* Esto coloca el submenú directamente debajo de la opción */
-  left: 50%; /* Esto alinea el submenú al centro de la opción */
-  transform: translateX(-50%); /* Centra el submenú */
-  background-color: #4C6A85;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  list-style: none;
-  padding: 8px 0;
-  margin: 0;
-  width: 150px;
+  top: -8px;
+  right: -8px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+  animation: cartBadgePulse 2s infinite;
+  z-index: 1;
+}
+
+@keyframes cartBadgePulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.cart-link:hover .cart-badge {
+  animation: cartBadgeShake 0.5s ease-in-out;
+}
+
+@keyframes cartBadgeShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+/* Estilos para el usuario loggeado */
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.user-name {
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.8) 0%, rgba(220, 38, 38, 0.8) 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 12px;
   border-radius: 8px;
-}
-
-.option:hover .submenu {
-  display: block; /* Cuando pasas el cursor sobre la opción, mostramos el submenú */
-}
-
-.submenu li {
-  color: white;
-  padding: 8px 12px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.submenu li:hover {
-  background-color: #3F5A73; /* Color de fondo al pasar el cursor sobre las opciones del submenú */
+.logout-btn:hover {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.auth-btn {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
   color: white;
-}
-/* Reset de estilos */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
 }
 
-.container {
-  margin: 0;
-  padding: 0;
-  width: 100%;
+.auth-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 0 12px;
+  }
+
+  .list {
+    gap: 8px;
+  }
+
+  .option {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .submenu {
+    width: 180px;
+    left: 0;
+    transform: translateX(0);
+  }
+
+  .option:hover .submenu {
+    transform: translateX(0) translateY(0);
+  }
+
+  .nav-icons {
+    gap: 16px;
+    padding-right: 12px;
+  }
+
+  .user-menu {
+    flex-direction: column;
+    gap: 6px;
+    padding: 6px 12px;
+  }
+
+  .user-name {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sections {
+    display: none;
+  }
+
+  .nav-icons {
+    gap: 12px;
+  }
+
+  .cart-badge {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+}
+
+/* ========== INDICADOR VISUAL DE SUBMENÚ ========== */
+
+.option:has(.submenu)::after {
+  content: "▼";
+  font-size: 10px;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+  opacity: 0.7;
+}
+
+.option:hover:has(.submenu)::after {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* Ajuste para el contenedor principal */
+
+/* Reset de estilos */
+
 
 /* Portada */
 .portada {
@@ -403,23 +652,11 @@ html, body {
   background: rgba(0, 0, 0, 0.5);
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%; /* Asegura que el html y el body ocupen todo el viewport */
-  background-color: #F5EFFF;
-}
 
-.container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Asegura que el contenedor ocupe al menos la altura del viewport */
-}
 .footer {
   background-color: #242424;
   color: white;
-  padding: 20px;
+ 
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap; /* Permite que las columnas se adapten en pantallas pequeñas */
@@ -534,4 +771,12 @@ html, body {
 }
 .tituloCategories {
   color: #2E5077;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+.containerProductos {
+   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }

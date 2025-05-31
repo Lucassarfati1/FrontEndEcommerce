@@ -1,30 +1,51 @@
-import React from "react";
-
 export function Footer() {
   return (
-    <div className="footer">
-      {/* Columna de Redes Sociales */}
+    <footer className="footer">
       <div className="footer-column">
-        <h4>Redes Sociales</h4>
+        <h4>Productos</h4>
         <ul>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">X (Twitter)</a></li>
+          <li>
+            <a href="#">Categoría 1</a>
+          </li>
+          <li>
+            <a href="#">Categoría 2</a>
+          </li>
+          <li>
+            <a href="#">Categoría 3</a>
+          </li>
         </ul>
       </div>
-
-      {/* Columna de Contacto */}
       <div className="footer-column">
-        <h4>Contacto</h4>
+        <h4>Ayuda</h4>
         <ul>
-          <li>Email: contacto@misitioweb.com</li>
+          <li>
+            <a href="#">Contacto</a>
+          </li>
+          <li>
+            <a href="#">FAQ</a>
+          </li>
+          <li>
+            <a href="#">Soporte</a>
+          </li>
         </ul>
       </div>
-
-      {/* Derechos Reservados */}
+      <div className="footer-column">
+        <h4>Empresa</h4>
+        <ul>
+          <li>
+            <a href="#">Sobre nosotros</a>
+          </li>
+          <li>
+            <a href="#">Términos</a>
+          </li>
+          <li>
+            <a href="#">Privacidad</a>
+          </li>
+        </ul>
+      </div>
       <div className="footer-rights">
-        © 2025 Mi Sitio Web. Todos los derechos reservados.
+        <p>&copy; 2024 Tu E-commerce. Todos los derechos reservados.</p>
       </div>
-    </div>
-  );
+    </footer>
+  )
 }

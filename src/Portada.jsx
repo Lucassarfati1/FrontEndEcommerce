@@ -7,7 +7,7 @@ export function Portada(props) {
             <div className='divBotones'>
             <button className='comprarBoton izquierda'>Lo más nuevo</button>
                 <button className='comprarBoton centro'>Ofertas</button>
-                <button className='comprarBoton derecha'>Todo</button>
+                 <a href="/products"><button className='comprarBoton derecha'>Todo</button></a>
             </div>
         </div>
 

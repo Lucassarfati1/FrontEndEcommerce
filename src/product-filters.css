@@ -1,0 +1,376 @@
+/* Layout principal con sidebar */
+.product-page-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Sidebar de filtros */
+.filters-sidebar {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+}
+
+.product-filters-sidebar {
+  width: 100%;
+}
+
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.filters-header h4 {
+  margin: 0;
+  color: #2e5077;
+  font-size: 1.2rem;
+}
+
+.clear-btn {
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s;
+}
+
+.clear-btn:hover:not(:disabled) {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.clear-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.filters-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-item label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.85rem;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 30px 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #2e5077;
+  box-shadow: 0 0 0 2px rgba(46, 80, 119, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.filter-item select {
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: white;
+}
+
+.filter-item select:focus {
+  outline: none;
+  border-color: #2e5077;
+  box-shadow: 0 0 0 2px rgba(46, 80, 119, 0.1);
+}
+
+.price-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price-range input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.price-range input:focus {
+  outline: none;
+  border-color: #2e5077;
+  box-shadow: 0 0 0 2px rgba(46, 80, 119, 0.1);
+}
+
+.price-range span {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.sort-order {
+  margin-top: 6px;
+  font-size: 0.85rem !important;
+}
+
+.search-btn {
+  background: #2e5077;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 8px;
+}
+
+.search-btn:hover:not(:disabled) {
+  background: #1e3a54;
+}
+
+.search-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.active-filters {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.active-filters small {
+  display: block;
+  color: #6b7280;
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.tag {
+  display: inline-block;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  margin: 2px 4px 2px 0;
+  border: 1px solid #bfdbfe;
+}
+
+/* Contenido principal */
+.products-main {
+  min-height: 500px;
+}
+
+.products-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.products-header h1 {
+  color: #2e5077;
+  margin-bottom: 8px;
+  font-size: 2rem;
+}
+
+.results-count {
+  color: #6b7280;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.search-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+}
+
+.no-results h3 {
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .product-page-layout {
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
+  }
+
+  .filters-sidebar {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-page-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .filters-sidebar {
+    position: static;
+    order: 2;
+  }
+
+  .products-main {
+    order: 1;
+  }
+
+  .filters-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .search-btn {
+    grid-column: span 2;
+  }
+
+  .active-filters {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters-content {
+    grid-template-columns: 1fr;
+  }
+
+  .search-btn {
+    grid-column: span 1;
+  }
+
+  .active-filters {
+    grid-column: span 1;
+  }
+
+  .price-range {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .price-range span {
+    text-align: center;
+  }
+}
+
+/* Estilos para estados de carga y error de categorías */
+.error-text {
+  color: #dc2626;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  display: block;
+}
+
+.retry-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: 2px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  margin-left: 8px;
+  transition: all 0.3s;
+}
+
+.retry-btn:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.retry-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mejorar el select cuando está deshabilitado */
+select:disabled {
+  background-color: #f9fafb;
+  color: #6b7280;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Indicador de carga para categorías */
+.categories-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.categories-loading::before {
+  content: "⏳";
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
