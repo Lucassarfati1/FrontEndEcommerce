@@ -1,16 +1,26 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-
+import { Link, redirect } from "react-router-dom"
+import  CheckoutForm  from './CheckoutForm';
+import { useContext } from 'react';
+import { UserContext } from './context/UserContext';
+import  CheckoutPopup  from './CheckoutPopup.jsx'
 export function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart }) {
-  const [total, setTotal] = useState(0)
 
+  const [total, setTotal] = useState(0)
+  const [showModal, setShowModal] = useState(false);
+  const { user } = useContext(UserContext);
+  const userAddress = user?.address || 'Dirección no definida';
   // Calcular total cuando cambien los items del carrito
   useEffect(() => {
     const newTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
     setTotal(newTotal)
   }, [cartItems])
+
+    const handleCheckout = () => {
+    setShowModal(true);
+  };
 
   const handleQuantityChange = (itemId, newQuantity) => {
     if (newQuantity < 1) {
@@ -20,10 +30,11 @@ export function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart })
     }
   }
 
-  const handleCheckout = () => {
+  /*const handleCheckout = () => {
     alert(`Procesando compra por $${total.toLocaleString()}`)
     // Aquí iría la lógica de checkout real
-  }
+    redirect('/CheckoutForm');
+  }*/
 
   if (cartItems.length === 0) {
     return (
@@ -118,6 +129,20 @@ export function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart })
           <button className="checkout-btn" onClick={handleCheckout}>
             Finalizar Compra 💳
           </button>
+          {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-md max-w-xl w-full relative">
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-2 right-2 text-gray-500"
+            >
+              ✖
+            </button>
+             
+             <CheckoutPopup userAddress={userAddress} />
+          </div>
+        </div>
+      )}
         </div>
       </div>
     </div>

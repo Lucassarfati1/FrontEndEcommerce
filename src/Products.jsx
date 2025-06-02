@@ -7,6 +7,7 @@ export default function Products({ products: propProducts, onAddToCart }) {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [showNotification, setShowNotification] = useState(false)
 
   // Si se pasan productos como props, usarlos; sino, cargar desde API
   useEffect(() => {
@@ -69,13 +70,15 @@ export default function Products({ products: propProducts, onAddToCart }) {
     }
   }
 
-  const handleAddToCart = (product) => {
-    if (onAddToCart) {
-      onAddToCart(product)
-      // Mostrar feedback visual
-      alert(`${product.name} agregado al carrito!`)
-    }
+const handleAddToCart = (product) => {
+  if (onAddToCart) {
+    onAddToCart(product)
+
+    // Mostrar la notificación visual
+    setShowNotification(`${product.name} agregado al carrito!`)
+    setTimeout(() => setShowNotification(false), 3000)
   }
+}
 
   if (loading) {
     return (
@@ -97,6 +100,11 @@ export default function Products({ products: propProducts, onAddToCart }) {
 
   return (
     <div className="containerProductos">
+      {showNotification && (
+  <div className="toast-notification">
+    {showNotification}
+  </div>
+)}
       {products.map((product) => (
         <div key={product.id} className="product-card">
           <Link to={`/product/${product.id}`}>

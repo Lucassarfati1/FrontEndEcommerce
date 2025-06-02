@@ -2,7 +2,7 @@
 
 import { useParams, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
-
+import ToastNotification from './ToastNotification'; // ajustá la ruta
 export function ProductDetail() {
   const { id } = useParams()
   const [product, setProduct] = useState(null)
@@ -11,7 +11,7 @@ export function ProductDetail() {
   const [quantity, setQuantity] = useState(1)
   const [selectedColor, setSelectedColor] = useState("Negro")
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-
+  const [toastMessage, setToastMessage] = useState('');
   // Fetch del producto desde la API
   useEffect(() => {
     const fetchProduct = async () => {
@@ -328,7 +328,14 @@ export function ProductDetail() {
               <span className="icon">🛒</span>
               Agregar al carrito
             </button>
+            {toastMessage && (
+        <ToastNotification
+          message={toastMessage}
+          onClose={() => setToastMessage('')}
+        />
+      )}
             <button className="btn-buy-now" onClick={() => handleBuyNow()}>
+              
               <span className="icon">💳</span>
               Comprar ahora
             </button>
@@ -371,7 +378,7 @@ export function ProductDetail() {
       color: selectedColor,
       price: product.price,
     })
-    alert(`Agregado al carrito: ${quantity} x ${product.name}`)
+    setToastMessage(`Agregado al carrito: ${quantity} x ${product.name}`);
   }
 
   function handleBuyNow() {

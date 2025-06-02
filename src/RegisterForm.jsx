@@ -8,6 +8,7 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
     lastName: "",
     age: "",
     genre: "",
+    address:"",
     email: "",
     password: "",
     confirmPassword: "",
@@ -148,6 +149,18 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }) {
               <option value="prefiero_no_decir">Prefiero no decir</option>
             </select>
           </div>
+        </div>
+         <div className="form-group">
+          <label htmlFor="address">Direccion</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            required
+            placeholder="Libertador 1150"
+          />
         </div>
 
         <div className="form-group">
