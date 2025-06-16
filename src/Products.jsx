@@ -3,6 +3,7 @@
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
+
 export default function Products({ products: propProducts, onAddToCart }) {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -18,57 +19,28 @@ export default function Products({ products: propProducts, onAddToCart }) {
       fetchProducts()
     }
   }, [propProducts])
+// Donde hacés el fetch:
+useEffect(() => {
+  fetch("http://localhost:3000/products/") // o donde sea que estás trayendo los datos
+    .then((res) => res.json())
+    .then((data) => {
+      const productsArray = data.data || []; // accedemos a "data" dentro del objeto
+      console.log("RESPUESTA DEL BACKEND:", data)
+      const mapped = productsArray.map((product) => ({
+          id: product.id,
+          name: product.nombre,
+          price: product.unityPrice,
+          img: product.img, // ← Asegurate que este viene como string
+          brand: product.brand,
+          category: "Sin categoría",
+          categoryId: product.id_category,
+          promotion: null,
+          discount: 0,
+          }));
+        setProducts(mapped); // <- Este setea `products`, que luego usás en el .map
+        });
+      }, []);
 
-  const fetchProducts = async () => {
-    try {
-      setLoading(true)
-      const response = await fetch("http://localhost:3000/products/")
-
-      if (!response.ok) {
-        throw new Error("Error al cargar productos")
-      }
-
-      const apiResponse = await response.json()
-      console.log("Respuesta de productos:", apiResponse)
-
-      let productsData = []
-      if (apiResponse.success && apiResponse.data) {
-        productsData = apiResponse.data
-      } else if (Array.isArray(apiResponse)) {
-        productsData = apiResponse
-      } else {
-        throw new Error("Estructura de respuesta inesperada")
-      }
-
-      const mappedProducts = productsData.map((product) => ({
-        id: product.id,
-        name: product.nombre,
-        price: product.unityPrice,
-        image: `/placeholder.svg?height=200&width=200&text=${encodeURIComponent(product.nombre)}`,
-        brand: product.brand,
-        category: "Sin categoría",
-        categoryId: product.id_category,
-        promotion: null,
-        discount: 0,
-      }))
-
-      setProducts(mappedProducts)
-    } catch (err) {
-      console.error("Error fetching products:", err)
-      setError(err.message)
-      setProducts(
-        Array.from({ length: 6 }, (_, i) => ({
-          id: i + 1,
-          name: `Producto ${i + 1}`,
-          price: (Math.random() * 100 + 10).toFixed(2),
-          image: `/placeholder.svg?height=200&width=200`,
-          brand: `Marca ${i + 1}`,
-        })),
-      )
-    } finally {
-      setLoading(false)
-    }
-  }
 
 const handleAddToCart = (product) => {
   if (onAddToCart) {
@@ -108,7 +80,9 @@ const handleAddToCart = (product) => {
       {products.map((product) => (
         <div key={product.id} className="product-card">
           <Link to={`/product/${product.id}`}>
-            <img src={product.image || "/placeholder.svg"} alt={product.name} />
+            <img src={product.img} alt={product.name} />
+            {console.log("Imagen del producto:", product.img)}
+
           </Link>
           <div className="product-info">
             <h3>{product.name}</h3>

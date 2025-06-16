@@ -20,7 +20,7 @@ const CheckoutForm = ({ userAddress, deliveryCost = 1500 }) => {
       method,
       cost: method === 'delivery' ? deliveryCost : 0
     };
-    navigate('/checkout/payment', { state: deliveryInfo });
+    navigate('/order', { state: deliveryInfo });
   };
 
   return (

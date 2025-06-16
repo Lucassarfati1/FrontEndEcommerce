@@ -1,5 +1,5 @@
 "use client"
-
+import './tailwind.css';
 import "./App.css"
 import { useState, useEffect } from "react"
 import { Promo } from "./Promo"
@@ -13,6 +13,7 @@ import { AuthNotification } from "./AuthNotification"
 import { AuthModal } from "./AuthModal"
 import { Route, Routes } from "react-router-dom"
 import CheckoutForm from "./CheckoutForm"
+import { Order } from './Order';
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
@@ -109,6 +110,7 @@ function App() {
           <Route path="/products" element={<ProductPage onAddToCart={handleAddToCart} />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/product/:id" element={<CheckoutForm />} />
+          <Route path="/order" element={<Order />} />
           <Route
             path="/carrito"
             element={

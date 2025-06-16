@@ -4,6 +4,7 @@ import { CarruselDeOfertas } from './CarruselDeOfertas'
 import { Publ } from './Publ'
 import { Description } from './Description'
 import { Categories } from './Categories'
+import './tailwind.css'; 
 
 
 export function HomePage() {
@@ -11,6 +12,9 @@ export function HomePage() {
     <>
 
       <Portada />
+      <div class="text-center bg-black text-blue-600 font-extrabold">
+      ¡Tailwind funciona!
+    </div>
       <CarruselDeOfertas />
       <Publ />
       <Description />

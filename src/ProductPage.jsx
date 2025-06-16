@@ -4,12 +4,14 @@ import { useState, useEffect } from "react"
 import { useLocation, useSearchParams } from "react-router-dom"
 import Products from "./Products"
 import { ProductFilters } from "./ProductFilters"
+import  ProductModal  from "./ProductModal";
 
 export function ProductPage({ onAddToCart }) {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [totalResults, setTotalResults] = useState(0)
+  const [showCreateModal, setShowCreateModal] = useState(false)
 
   // Para detectar parámetros de la URL
   const [searchParams] = useSearchParams()
@@ -141,6 +143,23 @@ export function ProductPage({ onAddToCart }) {
             <div className="loading-spinner"></div>
             <p>Buscando productos...</p>
           </div>
+        )}
+        <button
+          onClick={() => setShowCreateModal(true)}
+          className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-full shadow-lg z-50"
+        >
+        + Agregar producto nuevo
+          </button>
+          {/* Modal para crear producto */}
+        {showCreateModal && (
+          <ProductModal
+            onClose={() => {
+            setShowCreateModal(false);
+            // Refrescar productos después de agregar uno nuevo
+            const currentParams = new URLSearchParams(location.search);
+            handleSearch(currentParams.toString());
+            }}
+          />
         )}
 
         {/* Productos */}

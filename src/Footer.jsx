@@ -46,6 +46,7 @@ export function Footer() {
       <div className="footer-rights">
         <p>&copy; 2024 Tu E-commerce. Todos los derechos reservados.</p>
       </div>
+      <div className="bg-green-500 text-white p-4">Tailwind funciona</div>
     </footer>
   )
 }

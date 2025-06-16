@@ -1,0 +1,25 @@
+
+/* Caja del modal */
+.formContainer {
+  background-color: aliceblue;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  max-width: 90%;
+  z-index: 1000;
+  position: relative;
+}
+/* Fondo oscuro semitransparente */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* sombra alrededor */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* debajo del modal */
+}
