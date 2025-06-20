@@ -1,56 +1,64 @@
 "use client"
 
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-
 export default function Products({ products: propProducts, onAddToCart }) {
+  const { category } = useParams() // ✅ obtiene la categoría de la URL
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [showNotification, setShowNotification] = useState(false)
 
-  // Si se pasan productos como props, usarlos; sino, cargar desde API
   useEffect(() => {
+    // Si se pasaron productos por props, los usamos
     if (propProducts) {
       setProducts(propProducts)
       setLoading(false)
     } else {
       fetchProducts()
     }
-  }, [propProducts])
-// Donde hacés el fetch:
-useEffect(() => {
-  fetch("http://localhost:3000/products/") // o donde sea que estás trayendo los datos
-    .then((res) => res.json())
-    .then((data) => {
-      const productsArray = data.data || []; // accedemos a "data" dentro del objeto
-      console.log("RESPUESTA DEL BACKEND:", data)
+  }, [propProducts, category]) // ✅ importante: volver a ejecutar si cambia la categoría
+
+  const fetchProducts = async () => {
+    setLoading(true)
+    try {
+      const endpoint = category
+        ? `http://localhost:3000/products?category=${category}`
+        : "http://localhost:3000/products"
+
+      const res = await fetch(endpoint)
+      const data = await res.json()
+      const productsArray = data.data || []
+
       const mapped = productsArray.map((product) => ({
-          id: product.id,
-          name: product.nombre,
-          price: product.unityPrice,
-          img: product.img, // ← Asegurate que este viene como string
-          brand: product.brand,
-          category: "Sin categoría",
-          categoryId: product.id_category,
-          promotion: null,
-          discount: 0,
-          }));
-        setProducts(mapped); // <- Este setea `products`, que luego usás en el .map
-        });
-      }, []);
+        id: product.id,
+        name: product.nombre,
+        price: product.unityPrice,
+        img: product.img,
+        brand: product.brand,
+        category: "Sin categoría",
+        categoryId: product.id_category,
+        promotion: null,
+        discount: 0,
+      }))
 
-
-const handleAddToCart = (product) => {
-  if (onAddToCart) {
-    onAddToCart(product)
-
-    // Mostrar la notificación visual
-    setShowNotification(`${product.name} agregado al carrito!`)
-    setTimeout(() => setShowNotification(false), 3000)
+      setProducts(mapped)
+    } catch (err) {
+      console.error("Error al obtener productos:", err)
+      setError("No se pudieron cargar los productos.")
+    } finally {
+      setLoading(false)
+    }
   }
-}
+
+  const handleAddToCart = (product) => {
+    if (onAddToCart) {
+      onAddToCart(product)
+      setShowNotification(`${product.name} agregado al carrito!`)
+      setTimeout(() => setShowNotification(false), 3000)
+    }
+  }
 
   if (loading) {
     return (
@@ -73,16 +81,13 @@ const handleAddToCart = (product) => {
   return (
     <div className="containerProductos">
       {showNotification && (
-  <div className="toast-notification">
-    {showNotification}
-  </div>
-)}
+        <div className="toast-notification">{showNotification}</div>
+      )}
+
       {products.map((product) => (
         <div key={product.id} className="product-card">
           <Link to={`/product/${product.id}`}>
             <img src={product.img} alt={product.name} />
-            {console.log("Imagen del producto:", product.img)}
-
           </Link>
           <div className="product-info">
             <h3>{product.name}</h3>
@@ -96,8 +101,6 @@ const handleAddToCart = (product) => {
             {product.category && product.category !== "Sin categoría" && (
               <p style={{ color: "#666", fontSize: "0.8rem" }}>Categoría: {product.category}</p>
             )}
-
-            {/* Botones de acción */}
             <div className="product-actions">
               <Link to={`/product/${product.id}`} className="product-detail-btn">
                 Ver Detalle
