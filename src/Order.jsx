@@ -62,7 +62,7 @@ export function Order() {
         </div>
 
         {/* Componente de pago */}
-        <Payment />
+        <Payment order={orderInfo} />
       </div>
     </div>
   );

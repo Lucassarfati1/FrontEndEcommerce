@@ -33,7 +33,7 @@ export function LoginForm({ onSuccess, onSwitchToRegister }) {
       })
 
       const data = await response.json()
-
+      localStorage.setItem("authToken", data.token); // Guardar token
       if (data.success) {
         // Guardar token y datos del usuario
         localStorage.setItem("authToken", data.data.token)

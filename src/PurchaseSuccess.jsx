@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import { FaCheckCircle } from 'react-icons/fa';
 
 export function PurchaseSuccess() {
+  
+  
+  localStorage.removeItem("order");
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-200 flex flex-col items-center justify-center px-4 text-center">
       <FaCheckCircle className="text-green-600 text-6xl mb-4" />
@@ -13,13 +16,15 @@ export function PurchaseSuccess() {
       <div className="flex flex-col sm:flex-row gap-4">
         <Link
           to="/"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition"
+          className="bg-blue-600 hover:bg-blue-700 !text-white no-underline px-6 py-2 rounded-lg text-sm font-medium"
+
         >
           Volver al inicio
         </Link>
         <Link
           to="/orders"
-          className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-lg text-sm font-medium transition"
+            className="bg-blue-600 hover:bg-blue-700 !text-white no-underline px-6 py-2 rounded-lg text-sm font-medium"
+
         >
           Ver mis pedidos
         </Link>

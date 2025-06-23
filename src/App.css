@@ -19,7 +19,9 @@ body {
 #root {
   height: 100%;
 }
-
+a:not(.text-white) {
+  color: #646cff;
+}
 /* Contenedor principal de la aplicación */
 .app-container {
   min-height: 100vh;

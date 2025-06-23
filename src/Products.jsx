@@ -30,18 +30,18 @@ export default function Products({ products: propProducts, onAddToCart }) {
       const res = await fetch(endpoint)
       const data = await res.json()
       const productsArray = data.data || []
-
       const mapped = productsArray.map((product) => ({
-        id: product.id,
-        name: product.nombre,
-        price: product.unityPrice,
-        img: product.img,
-        brand: product.brand,
-        category: "Sin categoría",
-        categoryId: product.id_category,
-        promotion: null,
-        discount: 0,
-      }))
+          id: product.id,
+          name: product.nombre,
+          price: product.unityPrice,
+          img: product.img || product.image, // <-- esta es la línea clave
+          brand: product.brand,
+          category: "Sin categoría",
+          categoryId: product.id_category,
+          promotion: null,
+          discount: 0,
+        }))
+
 
       setProducts(mapped)
     } catch (err) {
@@ -83,11 +83,17 @@ export default function Products({ products: propProducts, onAddToCart }) {
       {showNotification && (
         <div className="toast-notification">{showNotification}</div>
       )}
-
-      {products.map((product) => (
+{console.log("Productos en Products.jsx:", products)}
+      {
+      products.map((product) => (
         <div key={product.id} className="product-card">
           <Link to={`/product/${product.id}`}>
-            <img src={product.img} alt={product.name} />
+          {console.log(product.img)}
+           <img
+          src={product.img || product.image || "https://via.placeholder.com/300x400?text=Sin+imagen"}
+          alt={product.name}
+  
+          />
           </Link>
           <div className="product-info">
             <h3>{product.name}</h3>

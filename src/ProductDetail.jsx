@@ -46,11 +46,7 @@ export function ProductDetail() {
           discount: 0, // Sin descuento por defecto
           // Valores por defecto para campos que no están en la API
           condition: "Nuevo",
-          images: [
-            `/placeholder.svg?height=400&width=400&text=${encodeURIComponent(productData.nombre)}`,
-            `/placeholder.svg?height=400&width=400&text=${encodeURIComponent(productData.nombre)}-2`,
-            `/placeholder.svg?height=400&width=400&text=${encodeURIComponent(productData.nombre)}-3`,
-          ],
+          img: productData.img,
           colors: ["Negro", "Blanco", "Azul", "Rojo"],
           deliveryPrice: 5990,
           stock: 15,
@@ -109,7 +105,7 @@ export function ProductDetail() {
               id: item.id,
               name: item.nombre,
               price: item.unityPrice,
-              image: `/placeholder.svg?height=150&width=150&text=${encodeURIComponent(item.nombre)}`,
+              img: item.img,
             }))
 
             setRelatedProducts(mappedRelated)
@@ -123,7 +119,7 @@ export function ProductDetail() {
             id: i + 10,
             name: `Producto Relacionado ${i + 1}`,
             price: (Math.random() * 50 + 20).toFixed(0),
-            image: `/placeholder.svg?height=150&width=150`,
+            img: `/placeholder.svg?height=150&width=150`,
           })),
         )
       }
@@ -142,11 +138,11 @@ export function ProductDetail() {
   }
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % product.images.length)
+    setCurrentImageIndex((prev) => (prev + 1) % product.img.length)
   }
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length)
+    setCurrentImageIndex((prev) => (prev - 1 + product.img.length) % product.img.length)
   }
 
   // Estados de carga y error
@@ -211,7 +207,7 @@ export function ProductDetail() {
               ‹
             </button>
             <img
-              src={product.images[currentImageIndex] || "/placeholder.svg"}
+              src={product.img || "/placeholder.svg"}
               alt={product.name}
               className="main-product-image"
             />
@@ -221,17 +217,14 @@ export function ProductDetail() {
           </div>
 
           {/* Thumbnails */}
-          <div className="image-thumbnails">
-            {product.images.map((image, index) => (
-              <img
-                key={index}
-                src={image || "/placeholder.svg"}
-                alt={`${product.name} ${index + 1}`}
-                className={`thumbnail ${index === currentImageIndex ? "active" : ""}`}
-                onClick={() => setCurrentImageIndex(index)}
-              />
-            ))}
-          </div>
+         <div className="image-thumbnails">
+  <img
+    src={product.img || "/placeholder.svg"}
+    alt={`${product.name}`}
+    className="thumbnail active"
+    onClick={() => setCurrentImageIndex(0)}
+  />
+</div>
 
           {/* Productos relacionados */}
           <div className="related-products">

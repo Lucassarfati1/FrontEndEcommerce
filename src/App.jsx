@@ -12,8 +12,10 @@ import { Cart } from "./Cart"
 import { AuthNotification } from "./AuthNotification"
 import { AuthModal } from "./AuthModal"
 import { Route, Routes } from "react-router-dom"
-import CheckoutForm from "./CheckoutForm"
+//import CheckoutForm from "./CheckoutForm"
 import { Order } from './Order';
+import { PurchaseSuccess } from './PurchaseSuccess';
+import { OrdersTable } from './OrdersTable';
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
@@ -109,8 +111,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<ProductPage onAddToCart={handleAddToCart} />} />
           <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/product/:id" element={<CheckoutForm />} />
+          
           <Route path="/order" element={<Order />} />
+           <Route path="/PurchaseSuccess" element={<PurchaseSuccess />} />
+           <Route path="/favoritos" element={<OrdersTable />} />
           <Route
             path="/carrito"
             element={

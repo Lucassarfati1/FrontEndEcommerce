@@ -79,7 +79,7 @@ export function ProductPage({ onAddToCart }) {
         id: product.id,
         name: product.nombre,
         price: product.unityPrice,
-        image: `/placeholder.svg?height=200&width=200&text=${encodeURIComponent(product.nombre)}`,
+        img: product.img,
         brand: product.brand,
         category: product.category?.name || "Sin categoría",
         categoryId: product.id_category,

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Link, redirect } from "react-router-dom"
-import  CheckoutForm  from './CheckoutForm';
+//import  CheckoutForm  from './CheckoutForm';
 import { useContext } from 'react';
 import { UserContext } from './context/UserContext';
 import  CheckoutPopup  from './CheckoutPopup.jsx'
@@ -69,7 +69,7 @@ export function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart })
         {cartItems.map((item) => (
           <div key={item.id} className="cart-item">
             <div className="item-image">
-              <img src={item.image || "/placeholder.svg?height=120&width=120"} alt={item.name} />
+              <img src={item.img || "/placeholder.svg?height=120&width=120"} alt={item.name} />
             </div>
 
             <div className="item-details">
