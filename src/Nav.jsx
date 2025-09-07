@@ -1,8 +1,17 @@
 "use client"
 
-import { Link } from "react-router-dom"
+import {  Link } from "react-router-dom"
+import { useState } from 'react'
+
 
 export function Nav({ user, onOpenAuth, onLogout, cartItemsCount = 0 }) {
+
+  const [desplegado,setDesplegado] = useState(false);
+
+function handleMenu(){
+  setDesplegado(!desplegado);
+}
+
   return (
     <div className="nav">
       <div className="nav-logo">
@@ -95,12 +104,43 @@ export function Nav({ user, onOpenAuth, onLogout, cartItemsCount = 0 }) {
                 Salir
               </button>
             </div>
+            
           ) : (
             <button onClick={onOpenAuth} className="auth-btn">
               👤
             </button>
           )}
         </li>
+    <li className="relative">
+  <div className="menuB">
+    <button
+      className="cursor-pointer p-2 hover:bg-gray-100 rounded transition"
+      onClick={handleMenu}
+    >
+      <img
+        src="./../menub.png"
+        className="w-6 h-6 object-contain inline-block align-middle"
+        alt="menu"
+      />
+    </button>
+  </div>
+
+  {desplegado && (
+    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
+  <a href="/perfil" className="block px-3 py-2 text-xs !text-black hover:bg-gray-100">
+    Perfil
+  </a>
+  <a href="/ajustes" className="block px-3 py-2 text-xs !text-black hover:bg-gray-100">
+    Ajustes
+  </a>
+  <a href="/salir" className="block px-3 py-2 text-xs !text-black hover:bg-gray-100">
+    Salir
+  </a>
+</div>
+
+  )}
+</li>
+
       </ul>
     </div>
   )

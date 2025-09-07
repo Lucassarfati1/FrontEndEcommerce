@@ -23,19 +23,19 @@ function App() {
   const [cartItems, setCartItems] = useState([])
 
   // Verificar si hay usuario loggeado al cargar la app
-  useEffect(() => {
-    const token = localStorage.getItem("authToken")
-    const userData = localStorage.getItem("userData")
-    const savedCart = localStorage.getItem("cartItems")
+    useEffect(() => {
+      const token = localStorage.getItem("authToken")
+      const userData = localStorage.getItem("userData")
+      const savedCart = localStorage.getItem("cartItems")
 
-    if (token && userData) {
-      try {
-        setUser(JSON.parse(userData))
-      } catch (error) {
-        console.error("Error parsing user data:", error)
-        localStorage.removeItem("authToken")
-        localStorage.removeItem("userData")
-      }
+      if (token && userData) {
+        try {
+          setUser(JSON.parse(userData))
+        } catch (error) {
+          console.error("Error parsing user data:", error)
+          localStorage.removeItem("authToken")
+          localStorage.removeItem("userData")
+        }
     }
 
     if (savedCart) {

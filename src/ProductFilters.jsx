@@ -192,6 +192,7 @@ export function ProductFilters({ onSearch, loading, initialFilters = {} }) {
               placeholder="Min"
               value={filters.minPrice}
               onChange={(e) => handleInputChange("minPrice", e.target.value)}
+                className="max-w-[80px] w-full appearance-none"
             />
             <span>-</span>
             <input
@@ -199,6 +200,7 @@ export function ProductFilters({ onSearch, loading, initialFilters = {} }) {
               placeholder="Max"
               value={filters.maxPrice}
               onChange={(e) => handleInputChange("maxPrice", e.target.value)}
+                className="max-w-[80px] w-full appearance-none"
             />
           </div>
         </div>

@@ -8,9 +8,18 @@ export const UserProvider = ({ children }) => {
 
   // Si querés mantener la sesión tras recarga:
   useEffect(() => {
-    const savedUser = JSON.parse(localStorage.getItem('user'));
-    if (savedUser) setUser(savedUser);
-  }, []);
+  const stored = localStorage.getItem('user');
+  if (stored && stored !== "undefined") {
+    try {
+      const savedUser = JSON.parse(stored);
+      setUser(savedUser);
+    } catch (err) {
+      console.error("Error parsing user from localStorage", err);
+      localStorage.removeItem('user');
+    }
+  }
+}, []);
+
 
   const login = (userData) => {
     setUser(userData);
