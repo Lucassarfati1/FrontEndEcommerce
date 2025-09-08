@@ -133,7 +133,7 @@ function handleMenu(){
   <a href="/ajustes" className="block px-3 py-2 text-xs !text-black hover:bg-gray-100">
     Ajustes
   </a>
-  <a href="/salir" className="block px-3 py-2 text-xs !text-black hover:bg-gray-100">
+  <a href="/salir" onClick={onLogout} className="block px-3 py-2 text-xs !text-black hover:bg-gray-100">
     Salir
   </a>
 </div>

@@ -7,7 +7,7 @@ export function OrdersTable(){
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/orders/')
+    fetch('http://localhost:3000/order/history')
       .then(res => res.json())
       .then(data => {
         if (data.success) setOrders(data.data);

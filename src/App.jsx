@@ -16,6 +16,7 @@ import { Route, Routes } from "react-router-dom"
 import { Order } from './Order';
 import { PurchaseSuccess } from './PurchaseSuccess';
 import { OrdersTable } from './OrdersTable';
+import { OrderDetail } from './OrderDetail';
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
@@ -114,7 +115,8 @@ function App() {
           
           <Route path="/order" element={<Order />} />
            <Route path="/PurchaseSuccess" element={<PurchaseSuccess />} />
-           <Route path="/favoritos" element={<OrdersTable />} />
+           <Route path="/order/history" element={<OrdersTable />} />
+           <Route path="/order/:id" element={<OrderDetail />} />
           <Route
             path="/carrito"
             element={
